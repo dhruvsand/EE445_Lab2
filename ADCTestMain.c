@@ -30,6 +30,7 @@
 #include "ADCSWTrigger.h"
 #include "../inc/tm4c123gh6pm.h"
 #include "PLL.h"
+#include "ST7735.h"
 
 #define PF2             (*((volatile uint32_t *)0x40025010))
 #define PF1             (*((volatile uint32_t *)0x40025008))
@@ -64,6 +65,7 @@ void Timer0A_Init100HzInt(void){
   TIMER0_IMR_R |= TIMER_IMR_TATOIM;// enable timeout (rollover) interrupt
   TIMER0_ICR_R = TIMER_ICR_TATOCINT;// clear timer0A timeout flag
   TIMER0_CTL_R |= TIMER_CTL_TAEN;  // enable timer0A 32-b, periodic, interrupts
+	ADC0_SAC_R=0x06;
   // **** interrupt initialization ****
                                    // Timer0A=priority 2
   NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF)|0x40000000; // top 3 bits
@@ -153,8 +155,57 @@ int main(void){
 			Jitter_Calculation();
 			break;
 		}
+	
+	}
+	//)x0936 to 0x93C
+//	int arrx[]={0x0936,0x0937,0x0938,0x0939,0x093A,0x093B,0x093C};
+//	int arry[7];
+//	int z=0;
+//	for(int i=0;i<7;i++){
+//		int count=0;
+//		for(int x=0;x<1000;x++){
+//		if(Required_Debug_array2[x]==arrx[i])
+//			count++;
+//		
+//		}
+//		arry[i]=count;
+//		
+//		z++;
+//		
+//		
+//		
+//	}
+	
+	
+	
+	
+	
+	
+//			int x1,y1,x2,y2;
+//		x1=0;
+//		y1=0;
+//		x2=127;
+//		y2=128;
+//			ST7735_InitR(INITR_REDTAB);
+//	    ST7735_FillScreen(ST7735_BLACK); 
+//	
+//	
+//	
+
+//		while(1){
+//			
+//			
+//		ST7735_DrawCue(x1,y1,x2,y2, ST7735_BLUE);
+//			x1=(x1+1)%128;
+//			y1=(y1+2)%160;
+//		}
+//		
+		
+			
+		
+			
   }
-}
+
 
 
 // ***************** TIMER1_Init ****************
